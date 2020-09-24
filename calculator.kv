@@ -1,0 +1,179 @@
+<BackColor@Widget>
+    background_color: 1,1,1,1
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            
+<BackLabel@Label+BackColor>
+    font_name: 'Roboto'        
+    
+<Button>:
+    background_color: (0,0,0,0)
+    color: app.colors['black']
+    font_name: 'Roboto'
+    font_size: 50
+    on_press:
+        self.background_color = (0,0,0,.2)
+    on_release:
+        self.background_color = (0,0,0,0)
+
+<ScrBtn@Button>:
+    on_press: app.keypad_num_press(root.text)
+       
+<AdvSympadBtn@ScrBtn>:
+    color: app.colors['white']
+    
+<SpecialScrBtn@Button>:
+    color: app.colors['white']
+    on_press: app.keypad_num_press(root.text + '(')
+    
+BoxLayout:
+    orientation: 'vertical'
+    spacing: -1
+    GridLayout:
+        size_hint: (1, .4)
+        cols: 1
+        padding: 3
+        halign: 'right'
+            
+        BackLabel:
+            id: screen
+            text: ""
+            text_size: self.size
+            halign: 'right'
+            font_size: 70
+            background_color: app.colors['white']
+            color: (.2, .2, .2, 1)
+            bold: True
+               
+        BackLabel:
+            id: res_screen
+            text: ""
+            text_size: self.size
+            halign: 'right'
+            font_size: 50
+            background_color: (1,1,1,.8)
+            color: (.3, .3, .3, .6)
+            bold: True
+                
+    PageLayout:                      
+        GridLayout:
+            cols: 2
+                   
+            GridLayout:
+                canvas:
+                    Color:
+                        rgb: (.9,.9,.9,)
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                        
+                cols: 3
+                spacing: 0
+                     
+                ScrBtn:
+                    text: "7"
+                        
+                ScrBtn:
+                    text: "8"
+                            
+                ScrBtn:
+                    text: "9"
+                      
+                ScrBtn:
+                    text: "4"
+                            
+                ScrBtn:
+                    text: "5"
+                            
+                ScrBtn:
+                    text: "6"
+                            
+                ScrBtn:
+                    text: "1"
+                        
+                ScrBtn:
+                    text: "2"
+                            
+                ScrBtn:
+                    text: "3"
+                         
+                ScrBtn:
+                    text: "."
+                            
+                ScrBtn:
+                    text: "0"
+                            
+                Button:
+                    text: "="
+                    on_press: app.solve()
+                           
+            GridLayout:
+                cols: 1
+                canvas:
+                    Color:
+                        rgba: (.8,.8,.8,0)
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                size_hint: (.5, .7)
+                spacing: 2
+                        
+                Button:
+                    id: del_clr_btn
+                    text: "DEL"
+                    on_press: app.delete_clear()
+                    
+                ScrBtn:
+                    text: "÷"
+                                    
+                ScrBtn:
+                    text: "×"
+                            
+                ScrBtn:
+                    text: "-"
+                                
+                ScrBtn:
+                    text: "+"
+                    
+        GridLayout:
+            cols: 2
+            canvas:
+                Color:
+                    rgb: (0,.6,0)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                
+            SpecialScrBtn:
+                text: "sin"
+                
+            SpecialScrBtn:
+                text: "cos"
+                
+            SpecialScrBtn:
+                text: "tan"
+            
+            AdvSympadBtn:
+                text: "!"  
+                     
+            AdvSympadBtn:
+                text: "π"
+                
+            AdvSympadBtn:
+                text: "e"
+              
+            AdvSympadBtn:
+                text: "^"
+                
+            AdvSympadBtn:
+                text: "√"
+                
+            AdvSympadBtn:
+                text: "("
+                
+            AdvSympadBtn:
+                text: ")"
