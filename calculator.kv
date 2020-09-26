@@ -21,14 +21,14 @@
         self.background_color = (0,0,0,0)
 
 <ScrBtn@Button>:
-    on_press: app.keypad_num_press(root.text)
+    on_press: app.keypad_press(root.text)
        
 <AdvSympadBtn@ScrBtn>:
     color: app.colors['white']
     
 <SpecialScrBtn@Button>:
     color: app.colors['white']
-    on_press: app.keypad_num_press(root.text + '(')
+    on_press: app.keypad_press(root.text + '(')
     
 BoxLayout:
     orientation: 'vertical'
