@@ -65,25 +65,26 @@ class CalculatorApp(App):
         self.auto_solve()
         
     def delete_clear(self):
-        """ deletes text and clears the entire screen label"""
-        if self.equal_pressed:
-            self.root.ids.screen.text = ""
-            self.root.ids.res_screen.text = ""
-            self.equal_pressed = False
-            self.root.ids.del_clr_btn.text = "DEL"
-            self.root.ids.res_screen.color = (.3,.3,.3,.6)
-        else:
-            exp = list(self.root.ids.screen.text)
-            if ''.join(exp[len(exp) - 2:]) in ('n(', 's('):
-                del exp[len(exp) - 4:]
-            elif len(exp) > 0:
-                exp.pop()
-            self.root.ids.screen.text = ''.join(exp)
-            self.auto_solve()
+            """ deletes text and clears the entire screen label"""
+            if self.equal_pressed:
+                    self.root.ids.screen.text = ""
+                    self.root.ids.res_screen.text = ""
+                    self.equal_pressed = False
+                    self.root.ids.del_clr_btn.text = "DEL"
+                    self.root.ids.res_screen.color = (.3,.3,.3,.6)
+            else:
+                    exp = list(self.root.ids.screen.text)
+                    if ''.join(exp[len(exp) - 2:]) in {'n(', 's('}:
+                            del exp[len(exp) - 4:]
+                    elif len(exp) > 0:
+                        exp.pop()
+                    self.root.ids.screen.text = ''.join(exp)
+                    self.auto_solve()
         
     def solve(self):
-        """ solves the expression on the screen label"""
-        if self.root.ids.screen.text != '':
+            """ solves the expression on the screen label"""
+            if self.root.ids.screen.text == '':
+                    return
             try:
                 self.equal_pressed = True
                 exp = self.root.ids.screen.text
@@ -97,7 +98,7 @@ class CalculatorApp(App):
             except ZeroDivisionError:
                 self.root.ids.res_screen.text = "Infinty"
                 self.root.ids.res_screen.color = self.colors['red']
-                
+
             self.root.ids.del_clr_btn.text = "CLR"
 
     def check_evaluable(self, exp):
