@@ -14,13 +14,13 @@ LabelBase.register(name = 'Roboto',
         
 # trigonometric functions that return degrees instead of radians
 def sin(num):
-        return math.sin(math.radians(num))
+    return math.sin(math.radians(num))
         
 def cos(num):
-        return math.cos(math.radians(num))
+    return math.cos(math.radians(num))
         
 def tan(num):
-        return math.tan(math.radians(num))
+    return math.tan(math.radians(num))
         
 # The main app
 class CalculatorApp(App):
@@ -65,41 +65,41 @@ class CalculatorApp(App):
         self.auto_solve()
         
     def delete_clear(self):
-            """ deletes text and clears the entire screen label"""
-            if self.equal_pressed:
-                    self.root.ids.screen.text = ""
-                    self.root.ids.res_screen.text = ""
-                    self.equal_pressed = False
-                    self.root.ids.del_clr_btn.text = "DEL"
-                    self.root.ids.res_screen.color = (.3,.3,.3,.6)
-            else:
-                    exp = list(self.root.ids.screen.text)
-                    if ''.join(exp[len(exp) - 2:]) in {'n(', 's('}:
-                            del exp[len(exp) - 4:]
-                    elif len(exp) > 0:
-                        exp.pop()
-                    self.root.ids.screen.text = ''.join(exp)
-                    self.auto_solve()
+        """ deletes text and clears the entire screen label"""
+        if self.equal_pressed:
+            self.root.ids.screen.text = ""
+            self.root.ids.res_screen.text = ""
+            self.equal_pressed = False
+            self.root.ids.del_clr_btn.text = "DEL"
+            self.root.ids.res_screen.color = (.3,.3,.3,.6)
+        else:
+            exp = list(self.root.ids.screen.text)
+            if ''.join(exp[len(exp) - 2:]) in {'n(', 's('}:
+                del exp[len(exp) - 4:]
+            elif len(exp) > 0:
+                exp.pop()
+            self.root.ids.screen.text = ''.join(exp)
+            self.auto_solve()
         
     def solve(self):
-            """ solves the expression on the screen label"""
-            if self.root.ids.screen.text == '':
-                    return
-            try:
-                self.equal_pressed = True
-                exp = self.root.ids.screen.text
-                exp = self.make_evaluable(exp)
-                solution = eval(exp)
-                self.root.ids.screen.text = str(round(solution, 5))
-                self.root.ids.res_screen.text = ''
-            except SyntaxError:
-                self.root.ids.res_screen.text = "Syntax Error"
-                self.root.ids.res_screen.color = self.colors['red']
-            except ZeroDivisionError:
-                self.root.ids.res_screen.text = "Infinty"
-                self.root.ids.res_screen.color = self.colors['red']
+        """ solves the expression on the screen label"""
+        if self.root.ids.screen.text == '':
+            return
+        try:
+            self.equal_pressed = True
+            exp = self.root.ids.screen.text
+            exp = self.make_evaluable(exp)
+            solution = eval(exp)
+            self.root.ids.screen.text = str(round(solution, 5))
+            self.root.ids.res_screen.text = ''
+        except SyntaxError:
+            self.root.ids.res_screen.text = "Syntax Error"
+            self.root.ids.res_screen.color = self.colors['red']
+        except ZeroDivisionError:
+            self.root.ids.res_screen.text = "Infinty"
+            self.root.ids.res_screen.color = self.colors['red']
 
-            self.root.ids.del_clr_btn.text = "CLR"
+        self.root.ids.del_clr_btn.text = "CLR"
 
     def check_evaluable(self, exp):
         """ checks if the expression text on the screen label can be evaluated without an error"""
@@ -117,7 +117,7 @@ class CalculatorApp(App):
             self.root.ids.res_screen.color = (.3, .3, .3, .6)
             self.root.ids.res_screen.text = str(round(eval(exp), 5))
         else:
-            self.root.ids.res_screen.text = ''    
+            self.root.ids.res_screen.text = ''
     
 if __name__ == '__main__':
     CalculatorApp().run()
